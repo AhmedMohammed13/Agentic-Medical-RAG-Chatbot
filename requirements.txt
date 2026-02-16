@@ -1,0 +1,37 @@
+# Core dependencies with version pinning for 
+
+# UI
+gradio==5.41.1
+
+# LangChain ecosystem - only what's needed
+langchain==0.3.27
+langchain_community==0.3.27
+langchain_openai==0.3.28
+langchain_huggingface==0.3.1
+langchain_google_genai==2.0.6
+
+# OpenAI
+openai==1.99.2
+google-generativeai==0.8.3
+
+#GROQ
+
+
+# Data processing
+pandas==2.3.1
+pydantic==2.11.7
+
+# Utilities
+python-dotenv==1.1.1
+pytz==2025.2
+requests==2.32.4
+
+# Embeddings and search - CPU optimized versions
+sentence-transformers==5.0.0
+faiss-cpu==1.11.0.post1  # CPU version is much smaller
+rank-bm25==0.2.2
+
+# Fix for numpy and torch compatibility
+numpy<2
+torch==2.2.2+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
