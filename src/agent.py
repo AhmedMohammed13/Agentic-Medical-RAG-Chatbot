@@ -1,11 +1,11 @@
 """
-Al Shifa Digital Healthcare - Medical Chatbot Agent
+NeoMed Digital Healthcare - Medical Chatbot Agent
 
-This module implements the core agent functionality for the Al Shifa Digital Healthcare
+This module implements the core agent functionality for the NeoMed Digital Healthcare
 medical chatbot system. It provides comprehensive medical assistance, appointment booking,
 and company information services with robust error handling and bilingual support.
 
-Author: Al Shifa Digital Healthcare Team
+Author: NeoMed Digital Healthcare Team
 Version: 1.0.0
 License: Proprietary
 """
@@ -451,7 +451,7 @@ async def safe_run_agent_streaming(user_input: str) -> AsyncGenerator[str, None]
         # Input length validation
         stripped_input = user_input.strip()
         
-        if len(stripped_input) > 1000:
+        if len(stripped_input) > 5000:
             logger.warning(f"Input too long: {len(stripped_input)} characters")
             yield "عذراً، الرسالة طويلة جداً. يرجى اختصار سؤالك."
             return
@@ -631,7 +631,7 @@ async def safe_run_agent(user_input: str) -> str:
         # Input length validation
         stripped_input = user_input.strip()
         
-        if len(stripped_input) > 1000:
+        if len(stripped_input) > 5000:
             logger.warning(f"Input too long: {len(stripped_input)} characters")
             return "عذراً، الرسالة طويلة جداً. يرجى اختصار سؤالك."
         
