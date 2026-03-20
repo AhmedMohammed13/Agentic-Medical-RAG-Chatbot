@@ -28,21 +28,20 @@ websearch_tool = TavilySearchResults(
     description="Fast search for medical questions and current info. Use for medical advice and up-to-date information."
 )
 
-
 @tool
 def get_current_datetime_tool() -> str:
     """
-    Returns the current date, time, and day of the week for Saudi Arabia (Asia/Riyadh).
+    Returns the current date, time, and day of the week for Egypt (Africa/Cairo).
     This is the only reliable source for date and time information. Use this tool
     whenever a user asks about 'today', 'now', or any other time-sensitive query.
-    The output is in English but shows Saudi Arabia local time.
+    The output is in English but shows Egypt local time.
     """
     try:
-        # Define the timezone for Saudi Arabia
-        saudi_tz = pytz.timezone('Asia/Riyadh')
+        # Define the timezone for Egypt
+        egypt_tz = pytz.timezone('Africa/Cairo')
         
         # Get the current time in that timezone
-        now_saudi = datetime.now(saudi_tz)
+        now_egypt = datetime.now(egypt_tz)
         
         # Manual mapping to ensure English output regardless of system locale
         days_en = {
@@ -56,14 +55,14 @@ def get_current_datetime_tool() -> str:
         }
         
         # Get English names using manual mapping
-        day_name = days_en[now_saudi.weekday()]
-        month_name = months_en[now_saudi.month]
-        day = now_saudi.day
-        year = now_saudi.year
+        day_name = days_en[now_egypt.weekday()]
+        month_name = months_en[now_egypt.month]
+        day = now_egypt.day
+        year = now_egypt.year
         
         # Format time manually to avoid locale issues
-        hour = now_saudi.hour
-        minute = now_saudi.minute
+        hour = now_egypt.hour
+        minute = now_egypt.minute
         
         # Convert to 12-hour format
         if hour == 0:
@@ -82,11 +81,10 @@ def get_current_datetime_tool() -> str:
         time_str = f"{hour_12:02d}:{minute:02d} {period}"
         
         # Create the final string
-        return f"Current date and time in Saudi Arabia: {day_name}, {month_name} {day}, {year} at {time_str}"
+        return f"Current date and time in Egypt: {day_name}, {month_name} {day}, {year} at {time_str}"
     
     except Exception as e:
         return f"Error getting current datetime: {str(e)}"
-
 
 # --- Pydantic Model for Structured Tool Input ---
 # All fields are now Optional to prevent validation errors at the agent level.
