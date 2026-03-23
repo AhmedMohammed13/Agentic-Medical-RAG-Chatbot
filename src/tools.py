@@ -14,7 +14,7 @@ import uuid
 retriever_tool = create_retriever_tool(
     hybrid_retriever,
     name="company_knowledge_tool",
-    description="Fast tool for company info, history, products, and policies. Use only for Al Shifa Digital Healthcare questions."
+    description="Fast tool for company info, history, products, and policies. Use only for NeoMed Digital Healthcare questions."
 )
 
 # Optimized web search tool with reduced results for speed
@@ -108,7 +108,7 @@ def book_consultation_tool(patient_name: Optional[str] = None, age: Optional[str
     """
     Books a medical consultation. If required information is missing, it returns a message
     asking for the missing details. Otherwise, it returns the booking data as a JSON object.
-    Email is optional and will be set to 'unknown@alshifa-care.com' if not provided.
+    Email is optional and will be set to 'unknown@neomed-care.com' if not provided.
     """
     # --- 1. Internal Validation: Check for missing required information ---
     missing_fields = []
@@ -128,7 +128,7 @@ def book_consultation_tool(patient_name: Optional[str] = None, age: Optional[str
         missing_fields.append("الوقت المفضل (preferred_time)")
     # Set default email if not provided
     if not email:
-        email = "unknown@alshifa-care.com"
+        email = "unknown@neomed-care.com"
     # --- 2. Handle missing required fields ---
     if missing_fields:
         missing_fields_str = "\n- ".join([""] + missing_fields)  # Add newline and bullet points
