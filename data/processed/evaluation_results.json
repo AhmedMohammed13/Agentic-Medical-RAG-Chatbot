@@ -1,0 +1,20 @@
+{
+  "intfloat/multilingual-e5-small": {
+    "total_time": 34.872081995010376,
+    "vector_avg_time": 0.038550949096679686,
+    "hybrid_avg_time": 0.028689193725585937,
+    "error": null
+  },
+  "sentence-transformers/paraphrase-multilingual-mpnet-base-v2": {
+    "total_time": 30.227547883987427,
+    "vector_avg_time": 0.07846899032592773,
+    "hybrid_avg_time": 0.06823534965515136,
+    "error": null
+  },
+  "ibm-granite/granite-embedding-107m-multilingual": {
+    "total_time": 12.907034635543823,
+    "vector_avg_time": 0.01561269760131836,
+    "hybrid_avg_time": 0.016374731063842775,
+    "error": null
+  }
+}
