@@ -1,11 +1,11 @@
 """
-NeoMed Digital Healthcare - Medical Chatbot Agent
+Al Shifa Digital Healthcare - Medical Chatbot Agent
 
-This module implements the core agent functionality for the NeoMed Digital Healthcare
+This module implements the core agent functionality for the Al Shifa Digital Healthcare
 medical chatbot system. It provides comprehensive medical assistance, appointment booking,
 and company information services with robust error handling and bilingual support.
 
-Author: NeoMed Digital Healthcare Team
+Author: Al Shifa Digital Healthcare Team
 Version: 1.0.0
 License: Proprietary
 """
@@ -103,6 +103,7 @@ AVAILABLE_TOOLS = [
     get_current_datetime_tool,
     book_consultation_tool
 ]
+
 
 # System message template for the agent
 SYSTEM_MESSAGE = """You are an advanced medical chatbot for "NeoMed Digital Healthcare" (شركة نيو ميد الرقمية للرعاية الصحية). Your name is "NeoMed Digital Assistant" (روبوت نيوميد الرقمي).
