@@ -298,11 +298,10 @@ async def api_chat_stream(chat_request: ChatRequest):
     except Exception as e:
         logger.error(f"❌ Stream error: {e}")
         raise HTTPException(500, str(e))
-
 # ==========================================
-# 3. File Upload Endpoint (equivalent to upload_and_process_file)
+# 3. upload file Endpoint
 # ==========================================
-
+    
 @app.post("/api/upload", response_model=FileUploadResponse, tags=["Documents"])
 async def api_upload_file(
     file: UploadFile = File(...),
@@ -315,7 +314,7 @@ async def api_upload_file(
     """
     try:
         # Validate file type
-        allowed_extensions = {'.pdf', '.txt', '.docx', '.doc'}
+        allowed_extensions = {'.pdf', '.txt', '.docx', '.doc', '.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tiff'}
         file_ext = Path(file.filename).suffix.lower()
         
         if file_ext not in allowed_extensions:
@@ -331,9 +330,10 @@ async def api_upload_file(
         if file_size > 10 * 1024 * 1024:
             raise HTTPException(400, "الملف كبير جداً. الحد الأقصى 10 ميجابايت")
         
-        # Save temporarily
-        temp_dir = Path("/tmp/medical_uploads")
-        temp_dir.mkdir(exist_ok=True)
+        # ⭐ FIX: Use cross-platform temp directory
+        import tempfile
+        temp_dir = Path(tempfile.gettempdir()) / "medical_uploads"
+        temp_dir.mkdir(parents=True, exist_ok=True)
         
         temp_file_path = temp_dir / f"{uuid.uuid4()}_{file.filename}"
         
@@ -372,7 +372,6 @@ async def api_upload_file(
     except Exception as e:
         logger.error(f"❌ Upload error: {e}")
         raise HTTPException(500, f"خطأ في رفع الملف: {str(e)}")
-
 # ==========================================
 # 4. Clear Memory Endpoint (equivalent to clear_chat_memory_and_history)
 # ==========================================
@@ -564,7 +563,8 @@ def upload_and_process_file(file) -> str:
         file_path = Path(file)
         
         # Validate
-        allowed_extensions = {'.pdf', '.txt', '.docx', '.doc'}
+        allowed_extensions = {'.pdf', '.txt', '.docx', '.doc',".jpg", ".jpeg", ".png", ".webp", 
+                        ".bmp", ".tiff", ".gif"}
         if file_path.suffix.lower() not in allowed_extensions:
             return f"نوع الملف غير مدعوم: {file_path.suffix}"
         
@@ -652,14 +652,14 @@ def create_interface():
     """
     
     with gr.Blocks(
-        title="الشفاء الرقمية للرعاية الصحية", 
+        title="نيو ميد الرقمية للرعاية الصحية", 
         css=custom_css,
         theme=gr.themes.Soft()
     ) as interface:
         
         gr.Markdown("""
             <div style="text-align: center; direction: rtl;">
-            # 🏥 الشفاء الرقمية للرعاية الصحية
+            # 🏥 نيو ميد الرقمية للرعاية الصحية
             ### المساعد الطبي الذكي
             </div>
         """, elem_classes="rtl")
@@ -689,9 +689,14 @@ def create_interface():
                 
             with gr.Column(scale=2):
                 gr.Markdown("### 📁 رفع الوثائق", elem_classes="rtl")
+                
                 file_upload = gr.File(
-                    label="ارفع وثيقة",
-                    file_types=[".pdf", ".txt", ".docx", ".doc"],
+                    label="ارفع وثيقة أو صورة",
+                    file_types=[
+                        ".pdf", ".txt", ".docx", ".doc",      # Documents
+                        ".jpg", ".jpeg", ".png", ".webp",     # Images ✅
+                        ".bmp", ".tiff", ".gif"               # More images ✅
+                    ],
                     type="filepath"
                 )
                 upload_status = gr.Textbox(
